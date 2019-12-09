@@ -1,6 +1,6 @@
 import os
 
-path = 'H:\\Machine_Learning\\Traffic_sign_detection'
+path = 'G:\\RSA_GIT\\RSA_TomTom\\Traffic_sign_detection_Machine_learning'
 count = 0
 last_folder = None
 for root, dirs, files in os.walk(path):
@@ -16,4 +16,8 @@ for root, dirs, files in os.walk(path):
                 print(folder)
                 print('new_path:',root+'\\'+folder+'_'+str(count)+'.png')
                 count+=1
-                os.rename(file_path,root+'\\'+folder+'_'+str(count)+'.png')
+                try:
+                    # If file already exist, skip
+                    os.rename(file_path,root+'\\'+folder+'_'+str(count)+'.png')
+                except:
+                    pass

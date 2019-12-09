@@ -81,9 +81,9 @@ def generate_XML_File(file_path, data_package):
     file.write(str(XML_data)[2:len(str(XML_data)) - 1])
 
 
-background_path = "G:\\RSA_GIT\\RSA_TomTom\\Fake_database\\background\\"
-sign_path = "G:\\RSA_GIT\\RSA_TomTom\\Fake_database\\signs\\"
-output_path = "G:\\RSA_GIT\\RSA_TomTom\\Fake_database\\output\\"
+background_path = "D:\\RSA\\Traffic_sign_detection_Machine_learning\\background\\"
+sign_path = "D:\\RSA\\Traffic_sign_detection_Machine_learning\\signs_new\\"
+output_path = "D:\\RSA\\output\\test"
 
 background_list = [name for name in os.listdir(background_path)]
 background_len = len(background_list) - 1
@@ -107,19 +107,27 @@ def get_random_sign():
 
 def resize_sign(sign):
     height, width, channels = sign.shape
+    # cv2.imshow('',sign)
+    # cv2.waitKey(0)
+    # print('sign shape: width:',width,' height:',height)
     # resize sign image
     # width: mean 150 pixel, 10 standard deviation
-    new_W = np.random.normal(150, 10)
+    new_W = np.random.normal(250, 10)
     # We don't make the image bigger, as it will bring some noise
     # which the noise is different than the camera noise
     # If we want to bring any noise, the noise feature should also match the camera behaviour
     # Arbitrary adding noise will cause image attack/defense issue
     if new_W > width:
         return sign
-    else:
-        new_H = height * new_W / height
-        resizedImage = cv2.resize(sign, (int(new_H), int(new_W)))
-        return resizedImage
+    # if random size too small, we random again
+    if new_W < 30:
+        new_W = np.random.normal(30, 10)
+        if new_W < 30:
+            new_W = 30
+
+    new_H = height * new_W / width
+    resizedImage = cv2.resize(sign, (int(new_W), int(new_H)))
+    return resizedImage
 
 
 def cut_the_empty_bounding(image):
@@ -263,7 +271,7 @@ def overlap(image):
             if style_img[row][col][3] > 100:
                 for i in range(3):
                     image[row][col][i] = style_img[row][col][i]
-    print('overlap')
+    # print('overlap')
 
     return image
 
@@ -274,8 +282,6 @@ def blend(image):
     style_img = cv2.imread(path + style_img, cv2.IMREAD_UNCHANGED)
     h, w, c = image.shape
     style_img = cv2.resize(style_img, (w, h))
-    print(image.shape)
-    print(style_img.shape)
     rand = np.random.normal(0.3, 0.1)
     if rand < 0:
         rand = 0
@@ -295,20 +301,19 @@ def generateComposite(composite_count):
         rand_sign, index = get_random_sign()
         sign = cv2.imread(rand_sign, cv2.IMREAD_UNCHANGED)
         height, width, _ = background.shape
-        sign = cut_the_empty_bounding(sign)
+        # sign = cut_the_empty_bounding(sign)
         resizedImage = resize_sign(sign)
         augmented_img = resizedImage
-        if random.random() > 0.8:
+        if random.random() > 0.90:
             augmented_img = augment_brightness_camera_images(augmented_img)
-        if random.random() > 0.8:
+        if random.random() > 0.90:
             augmented_img = add_random_shadow(augmented_img)
-        if random.random() > 0.8:
+        if random.random() > 0.90:
             augmented_img = overlap(augmented_img)
-        if random.random() > 0.8:
+        if random.random() > 0.90:
             augmented_img = blend(augmented_img)
-        # cv2.imshow('', augmented_img)
-        # cv2.waitKey(0)
         h, w, c = augmented_img.shape
+
         if c == 4:
             it = ImageTransformer(augmented_img, (h, w))
             theta = np.random.normal(0, 10)
@@ -322,11 +327,17 @@ def generateComposite(composite_count):
             gamma = np.random.normal(0, 3)
             if gamma < -20 or gamma > 20:
                 gamma = np.random.normal(0, 1)
+
             rotated = it.rotate_along_axis(theta=theta, phi=phi,
                                            gamma=gamma, dx=h / 2, dy=w / 2)
+            # 3D rotate function somehow resize the image(swap the width and height), I don't know how to fix
+            # in the matrix, so I have to resize it back here
+            rotated = cv2.resize(rotated, (w, h))
             rotated = cut_the_empty_bounding(rotated)
+            rotated = cv2.cvtColor(rotated, cv2.COLOR_RGB2RGBA)
+
             rotated_h, rotated_w, _ = rotated.shape
-            print(rotated_h, rotated_w)
+
             # Let's put the sign on x, y position
 
             # Extremely inconsistent results with x and y offset ?????? (spent lots of time debugging)
@@ -335,9 +346,9 @@ def generateComposite(composite_count):
 
             x_start = random.randint(0, x_start_max)
             y_start = random.randint(0, y_start_max)
-
             for x in range(rotated_w):
                 for y in range(rotated_h):
+
                     if rotated[y][x][3] > 50:
                         for i in range(3):
                             background[y + y_start][x + x_start][i] = rotated[y][x][i]
@@ -350,12 +361,13 @@ def generateComposite(composite_count):
             generate_XML_File((output_path + "/" + "Composite" + str(iterator) + ".xml"), XML_data)
 
             iterator = iterator + 1
+            print(iterator)
         else:
             print(rand_sign)
 
 
 def main():
-    generateComposite(50000)
+    generateComposite(2000)
 
 
 main()

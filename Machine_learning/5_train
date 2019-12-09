@@ -1,0 +1,27 @@
+conda activate env_3.5
+cd /d D:\Machine_Learning\models\research\object_detection
+
+Delete all files in the training folder if you want to start over. If you don't have any code changes, you can continue
+training without deleting any file in it. Change the fine_tune_checkpoint in config so we can start at last end point.
+eg.   fine_tune_checkpoint: "D:/MTSD/training/model.ckpt-1245"
+
+From D:\Machine_Learning\models\research\object_detection, run:
+python train.py --logtostderr --train_dir=D:/MTSD/training/ --pipeline_config_path=D:/Machine_Learning/MTSD/faster_rcnn_inception_v2_mtsd.config
+
+
+
+
+If any issue happen, we may need to change the Object detection ApI source code. After change any source code, under env_3.5 environment
+cd /d D:\Machine_Learning\models\research\
+python setup.py build
+python setup.py install
+then copy all folders in slim folder into
+D:\Anaconda\envs\env_3.5\Lib\site-packages\object_detection-0.1-py3.5.egg
+(In this PC add  PYTHONPATH cannot fix the module not found issue, so we manually copy the folders into the object detection installation path)
+
+Please see the issue track file to see any possible problem and the solution. Please add more if new problem happened.
+
+To view the training progress:
+tensorboard --logdir=D:\MTSD\training --port=8008 --host=127.0.0.1
+
+
