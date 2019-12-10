@@ -30,9 +30,9 @@ from object_detection.dataset_tools import tf_record_creation_util
 # FLAGS = flags.FLAGS
 #
 flags = tf.app.flags
-flags.DEFINE_string('csv_input', 'D:\\RSA\\output\\train_labels.csv', 'Path to the CSV input')
-flags.DEFINE_string('image_dir', 'D:\\RSA\\output\\train', 'Path to the image directory')
-flags.DEFINE_string('output_path', 'D:\\RSA\\output\\TRAIN_TF\\train.record', 'Path to output TFRecord')
+flags.DEFINE_string('csv_input', 'I:\\RSA\\output\\train_labels.csv', 'Path to the CSV input')
+flags.DEFINE_string('image_dir', 'I:\\RSA\\output\\train', 'Path to the image directory')
+flags.DEFINE_string('output_path', 'I:\\RSA\\output\\TRAIN_TF\\train.record', 'Path to output TFRecord')
 flags.DEFINE_integer('num_shards', 1000, 'Number of TFRecord shards')
 FLAGS = flags.FLAGS
 
