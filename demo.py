@@ -4,11 +4,12 @@ import os
 import cv2
 import numpy as np
 
-image_path = "G:\\RSA_GIT\\RSA_TomTom\\Fake_database\\signs\\fgdbhg.PNG"
+image_path = "G:\\RSA_GIT\\RSA_TomTom\\Fake_database\\signs\\15 mph\\3tterwt.PNG"
 
 h,w,_ = cv2.imread(image_path, cv2.IMREAD_UNCHANGED).shape
 img_shape = (h,w)
-it = ImageTransformer(image_path, img_shape)
+image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
+it = ImageTransformer(image, img_shape)
 
 
 for i in range(1000):
