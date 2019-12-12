@@ -26,9 +26,7 @@ def xml_to_csv(path):
 
 
 def main():
-    for folder in ['I:\\RSA\\output\\train','I:\\RSA\\output\\test']:
-
-
+    for folder in ['T:\\RSA\\output\\train','T:\\RSA\\output\\test']:
         xml_df = xml_to_csv(folder)
         xml_df.to_csv((folder + '_labels.csv'), index=None)
         print('Successfully converted xml to csv.')

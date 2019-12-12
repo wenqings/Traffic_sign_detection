@@ -45,7 +45,7 @@ FLAGS = flags.FLAGS
 # FLAGS = flags.FLAGS
 
 
-with open('D:\\RSA\\output\\NA_traffic_sign_map.json', 'r') as fp:
+with open('i:\\RSA\\output\\NA_traffic_sign_map.json', 'r') as fp:
     json_data = json.load(fp)
 
 
