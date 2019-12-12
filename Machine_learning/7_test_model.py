@@ -3,20 +3,21 @@ import cv2
 import numpy as np
 import tensorflow as tf
 import sys
-sys.path.append('D:\\Machine_Learning\\models\\research')
-sys.path.append('D:\\Machine_Learning\\models\\research\\slim')
-sys.path.append('D:\\Machine_Learning\\models\\research\\object_detection')
-# This is needed since the notebook is stored in the object_detection folder.
 sys.path.append("..")
+sys.path.append('/home/adas/Documents/models/research')
+sys.path.append('/home/adas/Documents/models/research/slim')
+sys.path.append('/home/adas/Documents/models/research/object_detection')
+# This is needed since the notebook is stored in the object_detection folder.
+
 
 # Import utilites
 from utils import label_map_util
 from utils import visualization_utils as vis_util
 
-PATH_TO_FROZEN_GRAPH ='D:\\MTSD\\training_1\\traffic_sign2/frozen_inference_graph.pb'
-PATH_TO_LABELS = "D:\\MTSD\\MTSD_traffic_sign_map.pbtxt"
+PATH_TO_FROZEN_GRAPH ='/home/adas/Documents/Traffic_sign_detection/output_model/12_09/frozen_inference_graph.pb'
+PATH_TO_LABELS = "/home/adas/Documents/Traffic_sign_detection/NA_traffic_sign_map.pbtxt"
 # Number of classes the object detector can identify
-NUM_CLASSES = 90
+NUM_CLASSES = 18
 
 ## Load the label map.
 # Label maps map indices to category names, so that when our convolution

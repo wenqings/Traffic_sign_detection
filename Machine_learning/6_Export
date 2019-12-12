@@ -3,4 +3,4 @@ cd /d D:\Machine_Learning\models\research\object_detection
 
  “XXXX” in “model.ckpt-XXXX” should be replaced with the highest-numbered .ckpt file in the training folder
 
-python export_inference_graph.py --input_type image_tensor --pipeline_config_path D:/Machine_Learning/MTSD/faster_rcnn_inception_v2_mtsd.config --trained_checkpoint_prefix D:/MTSD/training/model.ckpt-4512 --output_directory D:/MTSD/training_1/traffic_sign2
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path /home/adas/Documents/Traffic_sign_detection/faster_rcnn_inception_v2_traffic_sign.config --trained_checkpoint_prefix /home/adas/Documents/Traffic_sign_detection/training/model.ckpt-2797642 --output_directory /home/adas/Documents/Traffic_sign_detection/output_model/12_09
