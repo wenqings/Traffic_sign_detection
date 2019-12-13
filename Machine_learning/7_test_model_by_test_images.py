@@ -19,13 +19,6 @@ PATH_TO_LABELS = "/home/adas/Documents/output_model/NA_traffic_sign_map.pbtxt"
 # Path to image
 PATH_TO_IMAGE = '/home/adas/Documents/output_model/12_12/test_images'
 
-label_path = PATH_TO_IMAGE
-try:
-    os.mkdir(label_path)
-except OSError:
-    print ("Creation of the directory %s failed" % label_path)
-else:
-    print ("Successfully created the directory %s " % label_path)
 
 # Number of classes the object detector can identify
 NUM_CLASSES = 18
@@ -79,11 +72,11 @@ num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 for root, dir, files in os.walk(PATH_TO_IMAGE):
     for i in files:
         file_path = os.path.join(root, i)
-        if ('.png' in file_path or '.PNG' in file_path) and '_labelled' not in file_path and 'Speed_Sign' in file_path:
+        if ('.png' in file_path or '.PNG' in file_path) and '_labelled' not in file_path:
             print(file_path)
             print('parent folder:',os.path.dirname(file_path))
             image = cv2.imread(file_path)
-            original = image[200:915, 100:1800, :]
+            original = image
             height, width, _ = original.shape
             # cv2.imwrite(, image)
             print(width, height)
@@ -114,8 +107,7 @@ for root, dir, files in os.walk(PATH_TO_IMAGE):
             max_score = max(max(scores))
             print('max score', max_score)
             if max_score >= 0.8:
-                cv2.imwrite(os.path.dirname(file_path)+'/labelled/'+os.path.basename(file_path), original)
-                cv2.imwrite(os.path.dirname(file_path)+'/labelled/'+os.path.basename(file_path)[:-3] + "_labelled.png", image)
+                cv2.imwrite(os.path.dirname(file_path)+'/'+os.path.basename(file_path)[:-3] + "_labelled.png", image)
 
 # Press any key to close the image
 # cv2.waitKey(0)

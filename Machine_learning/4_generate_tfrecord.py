@@ -29,6 +29,7 @@ from object_detection.dataset_tools import tf_record_creation_util
 # flags.DEFINE_string('output_path', '', 'Path to output TFRecord')
 # FLAGS = flags.FLAGS
 #
+
 flags = tf.app.flags
 flags.DEFINE_string('csv_input', 'T:\\RSA\\output\\train_labels.csv', 'Path to the CSV input')
 flags.DEFINE_string('image_dir', 'T:\\RSA\\output\\train', 'Path to the image directory')
