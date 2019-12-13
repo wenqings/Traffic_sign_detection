@@ -1,49 +1,24 @@
-import cv2
-import re
-import os
-import random
-from tkinter import filedialog
-from tkinter import *
-
-import cv2
-from PIL import Image
-import os
-from os import walk
 import numpy as np
-import imutils
-import math
-from xml.dom import minidom
-import xml.etree.ElementTree as ET
+classes = np.array([[1,1]])
+s = np.array([[0.99,0.4]])
+boxes = np.array([[[1,2,3,4],[5,6,7,8]]])
 
+new_boxes = np.empty((0,4),int)
+new_scores = np.empty((0),float)
+new_classes = np.array([])
 
+for i in range(2):
+    if np.squeeze(s)[i] >= 0.6:
+        if np.squeeze(classes).astype(np.int32)[i] in [1, 2, 3, 4, 5]:
+            if boxes[0][i][2] - boxes[0][i][0] >= 0.01 and boxes[0][i][3] - boxes[0][i][1] >= 0.01:
+                a = [[boxes[0][i][0], boxes[0][i][1], boxes[0][i][2], boxes[0][i][3]]]
+                print(a)
+                new_boxes = np.append(new_boxes, a, axis=0)
 
-
-annotation = ET.Element("annotation")
-
-
-
-for i in range(10):
-    object = ET.SubElement(annotation, "object")
-    name = ET.SubElement(object, "name")
-    pose = ET.SubElement(object, "pose")
-    truncated = ET.SubElement(object, "truncated")
-    difficult = ET.SubElement(object, "difficult")
-    bndbox = ET.SubElement(object, "bndbox")
-    xmin = ET.SubElement(bndbox, "xmin")
-    ymin = ET.SubElement(bndbox, "ymin")
-    xmax = ET.SubElement(bndbox, "xmax")
-    ymax = ET.SubElement(bndbox, "ymax")
-
-    name.text = str(i)+'name'
-    pose.text = str(i)+'pose'
-    truncated.text = str(i)+'truncated'
-    difficult.text = str(i)+'difficult'
-    xmin.text = str(i)+'xmin'
-    ymin.text = str(i)+'ymin'
-    xmax.text = str(i)+'xmax'
-    ymax.text = str(i)+'ymax'
-
-XML_data = ET.tostring(annotation)
-print(XML_data)
-file = open('TEST.XML', "w")
-file.write(str(XML_data)[2:len(str(XML_data)) - 1])
+                # new_scores = np.append(new_scores, [s[0][i]],axis=0)
+                new_scores = np.append(new_scores, s[0][i])
+                # np.concatenate(new_classes, classes[0][i])
+                # print(classes[0][i])
+                print(new_boxes.shape)
+                print(new_scores.shape)
+                print('new_scores:',new_scores)

@@ -1,13 +1,15 @@
 conda activate env_3.5
 cd /home/adas/Documents/models/research/object_detection
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+
 
 Delete all files in the training folder if you want to start over. If you don't have any code changes, you can continue
 training without deleting any file in it. Change the fine_tune_checkpoint in config so we can start at last end point.
 eg.   fine_tune_checkpoint: "D:/MTSD/training/model.ckpt-1245"
 
 From  /home/adas/Documents/models/research/object_detection, run:
-python model_main.py --logtostderr --train_dir=/home/adas/Documents/Traffic_sign_detection/training/ --pipeline_config_path=/home/adas/Documents/Traffic_sign_detection/faster_rcnn_inception_v2_traffic_sign.config
-
+python model_main.py --logtostderr --model_dir=/home/adas/Documents/output_model/training/ --pipeline_config_path=/home/adas/Documents/output_model/faster_rcnn_inception_v2_traffic_sign.config --num_train_steps=10000000 --sample_1_of_n_eval_examples=100 
+--sample_1_of_n_eval_on_train_examples=5000
 
 
 

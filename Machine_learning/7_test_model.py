@@ -14,10 +14,10 @@ sys.path.append('/home/adas/Documents/models/research/object_detection')
 from utils import label_map_util
 from utils import visualization_utils as vis_util
 
-PATH_TO_FROZEN_GRAPH ='/home/adas/Documents/Traffic_sign_detection/output_model/12_09/frozen_inference_graph.pb'
-PATH_TO_LABELS = "/home/adas/Documents/Traffic_sign_detection/NA_traffic_sign_map.pbtxt"
+PATH_TO_FROZEN_GRAPH ='/home/adas/Documents/output_model/12_12/frozen_inference_graph.pb'
+PATH_TO_LABELS = "/home/adas/Documents/output_model/test_version.pbtxt"
 # Number of classes the object detector can identify
-NUM_CLASSES = 18
+NUM_CLASSES = 5
 
 ## Load the label map.
 # Label maps map indices to category names, so that when our convolution
@@ -73,17 +73,47 @@ while(True):
     (boxes, scores, classes, num) = sess.run(
         [detection_boxes, detection_scores, detection_classes, num_detections],
         feed_dict={image_tensor: frame_expanded})
+    # TODO: ADD Filter here, all of the shape is 1*300
+    new_boxes = np.empty((0,4),int)
+    new_scores = np.empty((0),float)
+    new_classes = np.empty((0),int)
+    show_flag = False
+    for i in range(300):
+        if np.squeeze(scores)[i]>=0.6:
+            if np.squeeze(classes).astype(np.int32)[i] in [1,2,3,4,5]:
+                if boxes[0][i][2]-boxes[0][i][0]>=0.01 and boxes[0][i][3]-boxes[0][i][1]>=0.01:
+                    new_boxes = np.append(new_boxes,[[boxes[0][i][0],boxes[0][i][1],boxes[0][i][2],boxes[0][i][3]]],axis=0)
+                    new_scores = np.append(new_scores,[scores[0][i]],axis=0)
+                    new_classes = np.append(new_classes,[classes[0][i]],axis=0)
+                    print(classes[0][i])
+                    show_flag = True
+
+
+    print('new_boxes',new_boxes.shape)
+    print('new_scores', new_scores.shape)
+    print('new_classes', new_classes.shape)
 
     # Draw the results of the detection (aka 'visulaize the results')
-    vis_util.visualize_boxes_and_labels_on_image_array(
-        frame,
-        np.squeeze(boxes),
-        np.squeeze(classes).astype(np.int32),
-        np.squeeze(scores),
-        category_index,
-        use_normalized_coordinates=True,
-        line_thickness=8,
-        min_score_thresh=0.60)
+    # vis_util.visualize_boxes_and_labels_on_image_array(
+    #     frame,
+    #     np.squeeze(boxes),
+    #     np.squeeze(classes).astype(np.int32),
+    #     np.squeeze(scores),
+    #     category_index,
+    #     use_normalized_coordinates=True,
+    #     line_thickness=8,
+    #     min_score_thresh=0.60)
+    if show_flag:
+        vis_util.visualize_boxes_and_labels_on_image_array(
+            frame,
+            new_boxes,
+            np.array(new_classes).astype(np.int32),
+            new_scores,
+
+            category_index,
+            use_normalized_coordinates=True,
+            line_thickness=8,
+            min_score_thresh=0.60)
 
     # All the results have been drawn on the frame, so it's time to display it.
     cv2.imshow('Object detector', frame)
