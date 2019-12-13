@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 
-df = pd.read_csv('D:\\RSA\\output\\train_labels.csv')
+df = pd.read_csv('T:\\RSA\\output\\train_labels.csv')
 
 type_list = set()
 # remove sign version number, eg.information--parking--g1 --> information--parking
@@ -18,8 +18,8 @@ def add_item(f,name, id):
     f.write('}\n')
 
 map_dick = {}
-output_path = 'D:\\RSA\\output\\NA_traffic_sign_map.pbtxt'
-output_json = 'D:\\RSA\\output\\NA_traffic_sign_map.json'
+output_path = 'T:\\RSA\\output\\NA_traffic_sign_map.pbtxt'
+output_json = 'T:\\RSA\\output\\NA_traffic_sign_map.json'
 f = open(output_path,"w")
 
 

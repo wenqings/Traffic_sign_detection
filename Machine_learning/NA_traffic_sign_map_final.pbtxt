@@ -1,0 +1,96 @@
+item {
+  name : "speed_limit"
+  id : 1
+}
+item {
+  name : "mph"
+  id : 2
+}
+item {
+  name : "10 mph"
+  id : 3
+}
+item {
+  name : "15 mph"
+  id : 4
+}
+item {
+  name : "20 mph"
+  id : 5
+}
+item {
+  name : "25 mph"
+  id : 6
+}
+item {
+  name : "30 mph"
+  id : 7
+}
+item {
+  name : "35 mph"
+  id : 8
+}
+item {
+  name : "40 mph"
+  id : 9
+}
+item {
+  name : "45 mph"
+  id : 10
+}
+item {
+  name : "50 mph"
+  id : 11
+}
+item {
+  name : "55 mph"
+  id : 12
+}
+item {
+  name : "60 mph"
+  id : 13
+}
+item {
+  name : "65 mph"
+  id : 14
+}
+item {
+  name : "70 mph"
+  id : 15
+}
+item {
+  name : "75 mph"
+  id : 16
+}
+item {
+  name : "80 mph"
+  id : 17
+}
+item {
+  name : "85 mph"
+  id : 18
+}
+item {
+  name : "tree crown"
+  id : 19
+}
+item {
+  name : "car rear light"
+  id : 20
+}
+item {
+  name : "car"
+  id : 21
+}
+item {
+  name : "advertisement_board"
+  id : 22
+}
+item {
+  name : "roof"
+  id : 23
+}
+item {
+  name : "tire"
+  id : 24
+}

@@ -71,7 +71,7 @@ def generate_XML_File(file_path, data_package):
 
 background_path = "G:\\RSA_GIT\\RSA_TomTom\\Traffic_sign_detection_Machine_learning\\background\\"
 sign_path = "G:\\RSA_GIT\\RSA_TomTom\\Traffic_sign_detection_Machine_learning\\signs_new\\"
-output_path = "I:\\RSA\\output\\train"
+output_path = "T:\\RSA\\output\\test"
 
 background_list = [name for name in os.listdir(background_path)]
 background_len = len(background_list) - 1
@@ -485,12 +485,79 @@ def generateComposite(composite_count):
             generate_XML_File((output_path + "/" + "Composite" + str(iterator) + ".xml"), XML_data)
 
             iterator = iterator + 1
+
         else:
-            print(rand_sign)
+            sign = cv2.imread(rand_sign, cv2.IMREAD_UNCHANGED)
+            resizedImage = resize_sign(sign)
+            augmented_img = resizedImage
+            augmented_img = cv2.cvtColor(augmented_img, cv2.COLOR_RGB2RGBA)
+
+            if random.random() > 0.90:
+                augmented_img = augment_brightness_camera_images([augmented_img])[0]
+            if random.random() > 0.90:
+                augmented_img = add_random_shadow([augmented_img])[0]
+            if random.random() > 0.90:
+                augmented_img = overlap([augmented_img])[0]
+            if random.random() > 0.90:
+                augmented_img = blend([augmented_img])[0]
+
+
+            h, w, c = augmented_img.shape
+            # cv2.imshow('1', augmented_concat)
+            # cv2.waitKey(0)
+            if random.random() > 0.20:
+                if c == 4:
+                    it = ImageTransformer(augmented_img, (h, w))
+                    theta = np.random.normal(0, 10)
+                    if theta < -20 or theta > 20:
+                        theta = np.random.normal(0, 1)
+
+                    phi = np.random.normal(0, 30)
+                    if phi < -45 or phi > 45:
+                        phi = np.random.normal(0, 1)
+
+                    gamma = np.random.normal(0, 3)
+                    if gamma < -20 or gamma > 20:
+                        gamma = np.random.normal(0, 1)
+
+                    augmented_img = it.rotate_along_axis(theta=theta, phi=phi,
+                                                         gamma=gamma, dx=h / 2, dy=w / 2)
+                    # 3D rotate function somehow resize the image(swap the width and height), I don't know how to fix
+                    # in the matrix, so I have to resize it back here
+                    augmented_img = cv2.resize(augmented_img, (w, h))
+                    augmented_img = cut_the_empty_bounding(augmented_img)
+                    augmented_img = cv2.cvtColor(augmented_img, cv2.COLOR_RGB2RGBA)
+
+            aug_h, aug_w, _ = augmented_img.shape
+
+            # Let's put the sign on x, y position
+            x_start_max = int(width) - aug_w
+            y_start_max = int(height) - aug_h
+
+            x_start = random.randint(0, x_start_max)
+            y_start = random.randint(0, y_start_max)
+            xmin.append(x_start)
+            ymin.append(y_start)
+            xmax.append(x_start + aug_w)
+            ymax.append(y_start + aug_h)
+            for x in range(aug_w):
+                for y in range(aug_h):
+                    if augmented_img[y][x][3] > 50:
+                        for i in range(3):
+                            background[y + y_start][x + x_start][i] = augmented_img[y][x][i]
+            cv2.imwrite(output_path + "/" + "Composite" + str(iterator) + ".png", background)
+            name.append(sign_list[sign_index][0])
+
+            XML_data = XMLPackage(path=rand_sign.replace('\\', '/'), filename="Composite" + str(iterator) + ".png",
+                                  width=width,
+                                  height=height, depth="4", name=name, xmin=xmin, ymin=ymin, xmax=xmax, ymax=ymax)
+            generate_XML_File((output_path + "/" + "Composite" + str(iterator) + ".xml"), XML_data)
+
+            iterator = iterator + 1
 
 
 def main():
-    generateComposite(50000)
+    generateComposite(100)
 
 
 main()
