@@ -1,6 +1,6 @@
 import os
 
-path = 'G:\\RSA_GIT\\RSA_TomTom\\Traffic_sign_detection_Machine_learning\\signs_stage2'
+path = 'G:\\RSA_GIT\\RSA_TomTom\\Traffic_sign_detection_Machine_learning\\signs'
 count = 0
 last_folder = None
 for root, dirs, files in os.walk(path):

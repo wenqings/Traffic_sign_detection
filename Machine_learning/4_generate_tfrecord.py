@@ -29,21 +29,21 @@ from object_detection.dataset_tools import tf_record_creation_util
 # flags.DEFINE_string('output_path', '', 'Path to output TFRecord')
 # FLAGS = flags.FLAGS
 #
+#
+# flags = tf.app.flags
+# flags.DEFINE_string('csv_input', 'T:\\RSA\\output\\train_labels.csv', 'Path to the CSV input')
+# flags.DEFINE_string('image_dir', 'T:\\RSA\\output\\train', 'Path to the image directory')
+# flags.DEFINE_string('output_path', 'T:\\RSA\\output\\TRAIN_TF\\train.record', 'Path to output TFRecord')
+# flags.DEFINE_integer('num_shards', 5000, 'Number of TFRecord shards')
+# FLAGS = flags.FLAGS
+
 
 flags = tf.app.flags
-flags.DEFINE_string('csv_input', 'T:\\RSA\\output\\train_labels.csv', 'Path to the CSV input')
-flags.DEFINE_string('image_dir', 'T:\\RSA\\output\\train', 'Path to the image directory')
-flags.DEFINE_string('output_path', 'T:\\RSA\\output\\TRAIN_TF\\train.record', 'Path to output TFRecord')
-flags.DEFINE_integer('num_shards', 1000, 'Number of TFRecord shards')
+flags.DEFINE_string('csv_input', 'T:\\RSA\\output\\test_labels.csv', 'Path to the CSV input')
+flags.DEFINE_string('image_dir', 'T:\\RSA\\output\\test', 'Path to the image directory')
+flags.DEFINE_string('output_path', 'T:\\RSA\\output\\TEST_TF\\test.record', 'Path to output TFRecord')
+flags.DEFINE_integer('num_shards', 100, 'Number of TFRecord shards')
 FLAGS = flags.FLAGS
-
-
-# flags = tf.app.flags
-# flags.DEFINE_string('csv_input', 'T:\\RSA\\output\\test_labels.csv', 'Path to the CSV input')
-# flags.DEFINE_string('image_dir', 'T:\\RSA\\output\\test', 'Path to the image directory')
-# flags.DEFINE_string('output_path', 'T:\\RSA\\output\\TEST_TF\\test.record', 'Path to output TFRecord')
-# flags.DEFINE_integer('num_shards', 100, 'Number of TFRecord shards')
-# FLAGS = flags.FLAGS
 
 
 with open('NA_traffic_sign_map_final.json', 'r') as fp:

@@ -70,8 +70,8 @@ def generate_XML_File(file_path, data_package):
 
 
 background_path = "G:\\RSA_GIT\\RSA_TomTom\\Traffic_sign_detection_Machine_learning\\background\\"
-sign_path = "G:\\RSA_GIT\\RSA_TomTom\\Traffic_sign_detection_Machine_learning\\signs_new\\"
-output_path = "T:\\RSA\\output\\test"
+sign_path = "G:\\RSA_GIT\\RSA_TomTom\\Traffic_sign_detection_Machine_learning\\signs\\"
+output_path = "T:\\RSA\\output\\train"
 
 background_list = [name for name in os.listdir(background_path)]
 background_len = len(background_list) - 1
@@ -317,7 +317,7 @@ def blend(image):
 
 
 def generateComposite(composite_count):
-    iterator = 0
+    iterator = 46132
     while iterator < composite_count:
         background = cv2.imread(get_random_background(), cv2.IMREAD_UNCHANGED)
         background = background[200:915, 100:1800, :]
@@ -557,7 +557,7 @@ def generateComposite(composite_count):
 
 
 def main():
-    generateComposite(100)
+    generateComposite(100000)
 
 
 main()

@@ -95,35 +95,35 @@ item {
   id : 24
 }
 item {
-  name : "TBD1"
+  name : "lane_end_merge_left"
   id : 25
 }
 item {
-  name : "TBD2"
+  name : "lane_end_merge_right"
   id : 26
 }
 item {
-  name : "TBD3"
+  name : "merge_left"
   id : 27
 }
 item {
-  name : "TBD4"
+  name : "merge_right"
   id : 28
 }
 item {
-  name : "TBD5"
+  name : "Pedestrian_crossing"
   id : 29
 }
 item {
-  name : "TBD6"
+  name : "Road_construction"
   id : 30
 }
 item {
-  name : "TBD7"
+  name : "stop"
   id : 31
 }
 item {
-  name : "TBD8"
+  name : "traffic_light_ahead"
   id : 32
 }
 item {

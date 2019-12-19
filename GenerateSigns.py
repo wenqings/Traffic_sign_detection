@@ -81,9 +81,9 @@ def generate_XML_File(file_path, data_package):
     file.write(str(XML_data)[2:len(str(XML_data)) - 1])
 
 
-background_path = "D:\\RSA\\Traffic_sign_detection_Machine_learning\\background\\"
-sign_path = "D:\\RSA\\Traffic_sign_detection_Machine_learning\\signs_new\\"
-output_path = "D:\\RSA\\output\\test"
+background_path = "G:\\RSA_GIT\\RSA_TomTom\\Traffic_sign_detection_Machine_learning\\background\\"
+sign_path = "G:\\RSA_GIT\\RSA_TomTom\\Traffic_sign_detection_Machine_learning\\signs\\"
+output_path = "T:\\RSA\\output\\test"
 
 background_list = [name for name in os.listdir(background_path)]
 background_len = len(background_list) - 1

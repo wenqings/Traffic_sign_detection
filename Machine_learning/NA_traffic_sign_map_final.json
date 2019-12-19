@@ -22,5 +22,13 @@
   "car": 21,
   "advertisement_board": 22,
   "roof": 23,
-  "tire": 24
+  "tire": 24,
+  "lane_end_merge_left":25,
+  "lane_end_merge_right":26,
+  "merge_left":27,
+  "merge_right":28,
+  "Pedestrian_crossing":29,
+  "Road_construction":30,
+  "stop":31,
+  "traffic_light_ahead":32
 }
