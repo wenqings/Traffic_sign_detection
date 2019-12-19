@@ -8,8 +8,7 @@ training without deleting any file in it. Change the fine_tune_checkpoint in con
 eg.   fine_tune_checkpoint: "D:/MTSD/training/model.ckpt-1245"
 
 From  /home/adas/Documents/models/research/object_detection, run:
-python model_main.py --logtostderr --model_dir=/home/adas/Documents/output_model/training/ --pipeline_config_path=/home/adas/Documents/output_model/faster_rcnn_inception_v2_traffic_sign.config --num_train_steps=10000000 --sample_1_of_n_eval_examples=100 
---sample_1_of_n_eval_on_train_examples=5000
+python model_main.py --logtostderr --model_dir=/home/adas/Documents/output_model/training/ --pipeline_config_path=/home/adas/Documents/output_model/faster_rcnn_inception_v2_traffic_sign.config --num_train_steps=10000000 --sample_1_of_n_eval_examples=1 --sample_1_of_n_eval_on_train_examples=3000
 
 
 
@@ -24,6 +23,6 @@ D:\Anaconda\envs\env_3.5\Lib\site-packages\object_detection-0.1-py3.5.egg
 Please see the issue track file to see any possible problem and the solution. Please add more if new problem happened.
 
 To view the training progress:
-tensorboard --logdir=D:\MTSD\training --port=8008 --host=127.0.0.1
+tensorboard --logdir=/home/adas/Documents/output_model/training --port=8008 --host=127.0.0.1
 
 

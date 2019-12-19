@@ -14,10 +14,10 @@ sys.path.append('/home/adas/Documents/models/research/object_detection')
 from utils import label_map_util
 from utils import visualization_utils as vis_util
 
-PATH_TO_FROZEN_GRAPH ='/home/adas/Documents/output_model/12_12/frozen_inference_graph.pb'
+PATH_TO_FROZEN_GRAPH ='/home/adas/Documents/output_model/12_16/frozen_inference_graph.pb'
 PATH_TO_LABELS = "/home/adas/Documents/output_model/test_version.pbtxt"
 # Number of classes the object detector can identify
-NUM_CLASSES = 5
+NUM_CLASSES = 100
 
 ## Load the label map.
 # Label maps map indices to category names, so that when our convolution
@@ -80,7 +80,7 @@ while(True):
     show_flag = False
     for i in range(300):
         if np.squeeze(scores)[i]>=0.6:
-            if np.squeeze(classes).astype(np.int32)[i] in [1,2,3,4,5]:
+            if np.squeeze(classes).astype(np.int32)[i] in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]:
                 if boxes[0][i][2]-boxes[0][i][0]>=0.01 and boxes[0][i][3]-boxes[0][i][1]>=0.01:
                     new_boxes = np.append(new_boxes,[[boxes[0][i][0],boxes[0][i][1],boxes[0][i][2],boxes[0][i][3]]],axis=0)
                     new_scores = np.append(new_scores,[scores[0][i]],axis=0)
