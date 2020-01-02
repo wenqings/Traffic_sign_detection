@@ -127,55 +127,55 @@ item {
   id : 32
 }
 item {
-  name : "TBD9"
+  name : "cyclists"
   id : 33
 }
 item {
-  name : "TBD10"
+  name : "do_not_enter"
   id : 34
 }
 item {
-  name : "TBD11"
+  name : "ice"
   id : 35
 }
 item {
-  name : "TBD12"
+  name : "one_way"
   id : 36
 }
 item {
-  name : "TBD13"
+  name : "railway_crossing"
   id : 37
 }
 item {
-  name : "TBD14"
+  name : "sharp_curve_left"
   id : 38
 }
 item {
-  name : "TBD15"
+  name : "sharp_curve_right"
   id : 39
 }
 item {
-  name : "TBD16"
+  name : "speed_limit_withdrawal"
   id : 40
 }
 item {
-  name : "TBD17"
+  name : "wildlife"
   id : 41
 }
 item {
-  name : "TBD18"
+  name : "winding_road_left"
   id : 42
 }
 item {
-  name : "TBD19"
+  name : "winding_road_right"
   id : 43
 }
 item {
-  name : "TBD20"
+  name : "wrong_way"
   id : 44
 }
 item {
-  name : "TBD21"
+  name : "yield"
   id : 45
 }
 item {

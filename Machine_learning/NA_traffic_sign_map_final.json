@@ -30,5 +30,18 @@
   "Pedestrian_crossing":29,
   "Road_construction":30,
   "stop":31,
-  "traffic_light_ahead":32
+  "traffic_light_ahead":32,
+  "cyclists":33,
+  "do_not_enter":34,
+  "ice":35,
+  "one_way":36,
+  "railway_crossing":37,
+  "sharp_curve_left":38,
+  "sharp_curve_right":39,
+  "speed_limit_withdrawal":40,
+  "wildlife":41,
+  "winding_road_left":42,
+  "winding_road_right":43,
+  "wrong_way":44,
+  "yield":45
 }
