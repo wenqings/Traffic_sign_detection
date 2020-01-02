@@ -14,14 +14,14 @@ from utils import label_map_util
 from utils import visualization_utils as vis_util
 
 
-PATH_TO_FROZEN_GRAPH ='/home/adas/Documents/output_model/12_12/frozen_inference_graph.pb'
-PATH_TO_LABELS = "/home/adas/Documents/output_model/NA_traffic_sign_map.pbtxt"
+PATH_TO_FROZEN_GRAPH ='/home/adas/Documents/output_model/12_16/frozen_inference_graph.pb'
+PATH_TO_LABELS = "/home/adas/Documents/output_model/NA_traffic_sign_map_final.pbtxt"
 # Path to image
-PATH_TO_IMAGE = '/home/adas/Documents/output_model/12_12/test_images'
+PATH_TO_IMAGE = '/home/adas/Documents/output_model/12_16/test_images'
 
 
 # Number of classes the object detector can identify
-NUM_CLASSES = 18
+NUM_CLASSES = 100
 
 # Load the label map.
 # Label maps map indices to category names, so that when our convolution
